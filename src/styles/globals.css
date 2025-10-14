@@ -23,3 +23,30 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans);
 }
+
+@layer utilities {
+  /* Bold 20px */
+  .ty-5 {
+    @apply text-[20px] leading-[28px] font-bold;
+  }
+
+  /* Bold 18px */
+  .ty-4 {
+    @apply text-[18px] leading-[26px] font-bold;
+  }
+
+  /* Extra Bold 16px */
+  .ty-3 {
+    @apply text-[16px] leading-[24px] font-bold;
+  }
+
+  /* Bold 16px */
+  .ty-2 {
+    @apply text-[16px] leading-[24px] font-bold tracking-tight;
+  }
+
+  /* Regular 16px */
+  .ty-1 {
+    @apply text-[16px] leading-[24px] font-normal;
+  }
+}
