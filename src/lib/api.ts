@@ -1,14 +1,25 @@
 import axios from 'axios';
 
 import { apiBase, itemsUrl, itemUrl } from '@lib/config';
+import { handleApiError } from '@lib/error';
 import type { Todo } from '@modules/todo';
 
 const client = axios.create({
   baseURL: apiBase,
+  timeout: 8000,
   headers: {
     'Content-Type': 'application/json',
   },
 });
+
+client.interceptors.response.use(
+  (res) => res,
+  (err) => {
+    const msg = handleApiError(err);
+    console.error(msg);
+    throw new Error(msg);
+  }
+);
 
 export const getTodos = async (): Promise<Todo[]> => {
   const response = await client.get(itemsUrl);
