@@ -63,7 +63,7 @@ cd todo-list
 pnpm install
 
 # 3. 환경 변수 설정 (.env.local)
-NEXT_PUBLIC_API_URL=https://assignment-todolist-api.vercel.app/api/shionpark
+NEXT_PUBLIC_API_URL=https://assignment-todolist-api.vercel.app/api/<tenantId>
 
 # 4. 개발 서버 실행
 pnpm run dev
@@ -71,3 +71,18 @@ pnpm run dev
 # 5. 브라우저에서 확인
 http://localhost:3000
 ```
+
+> **⚙️ tenantId** <br/>
+
+- tenantId는 API 요청 시 본인을 식별하기 위한 고유 ID입니다. <br/>
+- 닉네임이나 영문 아이디를 자유롭게 지정할 수 있으며,<br/>
+  예를 들어 tenantId가 shionpark이라면 요청 URL은 다음과 같습니다:<br/>
+  `https://assignment-todolist-api.vercel.app/api/shionpark/items`
+
+## 작업 순서
+
+1. 환경설정 chore/init-… → chore/config-env-tenant → feat/api-client
+2. 컬러 시스템 및 공통 컴포넌트 feat/ui-system-colors → feat/common-components
+3. Todo CRUD feat/todo-list-read → feat/todo-create → feat/todo-toggle
+4. Todo 상세 조회 feat/todo-route-detail → feat/todo-update → feat/todo-delete
+5. 반응형 레이아웃 feat/responsive-layout → docs/readme-usage → chore/deploy-vercel → refactor/\*
