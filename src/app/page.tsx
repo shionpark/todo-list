@@ -3,15 +3,18 @@
 import Image from 'next/image';
 import Input from '@components/common/Input';
 import TodoButton from '@components/todo/TodoButton';
+import { useBreakpoint } from '@hooks/useBreakpoint';
 
 export default function Home() {
+  const { sm } = useBreakpoint();
+
   return (
     <>
       <div className="flex justify-between gap-2">
         <Input type="search" />
         <TodoButton type="add" primary onClick={() => alert('추가하기!')} />
       </div>
-      <div className="mt-6 grid gap-4 sm:grid-cols-1 md:grid-cols-2">
+      <div className="mt-6 grid gap-4 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2">
         <div>
           <div className="w-24 rounded-3xl bg-lime-300 p-1.5 text-center font-bold text-green-800">
             TO DO
