@@ -1,44 +1,46 @@
 @import 'tailwindcss';
 
-:root {
-  --font-nanum: 'NanumSquare', sans-serif;
-  --color-bg: #f1f5f9; /* slate100 */
-  --color-text: #0f172a; /* slate900 */
-  --color-border: #e2e8f0; /* slate200 */
-  --color-primary: #7c3aed; /* violet600 */
-  --color-success: #bef264; /* lime300 */
-  --color-failure: #f43f5e; /* rose500 */
-  --color-brown: #92400e; /* amber800 */
+@theme {
+  /* 원색 토큰 */
+  --color-slate-900: #0f172a;
+  --color-slate-800: #1e293b;
+  --color-slate-500: #64748b;
+  --color-slate-400: #94a3b8;
+  --color-slate-300: #cbd5e1;
+  --color-slate-200: #e2e8f0;
+  --color-slate-100: #f1f5f9;
+  --color-violet-600: #7c3aed;
+  --color-violet-100: #ede9fe;
+  --color-rose-500: #f43f5e;
+  --color-lime-300: #bef264;
+  --color-amber-800: #92400e;
+
+  /* 의미 기반 매핑 */
+  --color-bg: var(--color-slate-100);
+  --color-text: var(--color-slate-900);
+  --color-border: var(--color-slate-300);
+  --color-primary: var(--color-violet-600);
+  --color-delete: var(--color-rose-500);
+  --color-edit: var(--color-lime-300);
+
+  /** 폰트 */
+  --font-sans: var(--font-nanum), ui-sans-serif, system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-bg: #0f172a; /* slate900 */
-    --color-text: #f1f5f9; /* slate100 */
-    --color-border: #1e293b; /* slate800 */
-    --color-primary: #7c3aed; /* violet100 */
-    --color-success: #bef264;
-    --color-failure: #f43f5e;
-    --color-brown: #92400e;
-  }
-}
-
-@theme inline {
-  --color-bg: var(--color-bg);
-  --color-text: var(--color-text);
-  --color-border: var(--color-border);
-  --color-primary: var(--color-primary);
-  --color-success: var(--color-success);
-  --color-failure: var(--color-failure);
-  --color-brown: var(--color-brown);
-}
-
+/* body에 토큰 적용 */
 body {
-  background-color: var(--color-bg);
-  color: var(--color-text);
-  font-family: var(--font-nanum);
+  @apply bg-bg text-text font-sans antialiased;
 }
 
+input {
+  @apply focus:outline-none;
+}
+
+button {
+  @apply hover:cursor-pointer;
+}
+
+/* 유틸 추가 */
 @layer utilities {
   /* Bold 20px */
   .ty-5 {
@@ -52,7 +54,7 @@ body {
 
   /* Extra Bold 16px */
   .ty-3 {
-    @apply text-[16px] leading-[24px] font-bold;
+    @apply text-[16px] leading-[24px] font-extrabold;
   }
 
   /* Bold 16px */

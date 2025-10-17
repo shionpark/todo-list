@@ -1,5 +1,7 @@
-import type { Metadata } from 'next';
+import Link from 'next/link';
+import Image from 'next/image';
 import localFont from 'next/font/local';
+import type { Metadata } from 'next';
 import '../styles/globals.css';
 
 const nanumSquare = localFont({
@@ -32,7 +34,20 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={`${nanumSquare.variable} font-sans antialiased`}>
-        {children}
+        <header className="border-b border-slate-200 bg-white">
+          <div className="container mx-auto flex h-16 max-w-4xl items-center px-4">
+            <Link href="/">
+              <Image
+                src="/images/logo.png"
+                alt="My Todo List 로고"
+                width={120}
+                height={32}
+                priority
+              />
+            </Link>
+          </div>
+        </header>
+        <main className="container mx-auto max-w-4xl p-4">{children}</main>
       </body>
     </html>
   );
