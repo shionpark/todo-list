@@ -3,20 +3,20 @@
 import { Plus, Check, X } from 'lucide-react';
 import Button from '@components/Button';
 
-interface TodoButtonProps {
-  type: 'add' | 'edit' | 'delete';
+interface TodoButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant: 'add' | 'edit' | 'delete';
   primary?: boolean;
   iconOnly?: boolean;
-  onClick: () => void;
 }
 
 export default function TodoButton({
-  type,
+  variant,
   primary = false,
   iconOnly = false,
   onClick,
 }: TodoButtonProps) {
-  const variants = {
+  const types = {
     add: {
       icon: <Plus className="size-5" />,
       label: '추가하기',
@@ -34,7 +34,7 @@ export default function TodoButton({
     },
   };
 
-  const { icon, label, baseColor } = variants[type];
+  const { icon, label, baseColor } = types[variant];
   const shape = iconOnly
     ? 'w-auto p-2.5 justify-center'
     : 'flex gap-1 px-3 py-2';
