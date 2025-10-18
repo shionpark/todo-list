@@ -3,13 +3,13 @@
 import Input from '@components/Input';
 import TodoButton from './TodoButton';
 import { useBreakpoint } from '@hooks/useBreakpoint';
-import { useTodoInput } from '../hooks/useTodoInput';
+import { useCreateTodoInput } from '../hooks/useCreateTodoInput';
 import { useCreateTodo } from '@lib/queryClient/useCreateTodo';
 
 export default function TodoForm() {
   const { mutate: addTodo } = useCreateTodo();
 
-  const { value, handleChange, handleSubmit } = useTodoInput(
+  const { value, handleChange, handleSubmit } = useCreateTodoInput(
     (name) => addTodo({ name }) // string → CreateTodoPayload로 변환
   );
 
