@@ -1,7 +1,7 @@
 'use client';
 
 import { Plus, Check, X } from 'lucide-react';
-import Button from '@components/common/Button';
+import Button from '@components/Button';
 
 interface TodoButtonProps {
   type: 'add' | 'edit' | 'delete';
