@@ -4,7 +4,7 @@
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
-import { apiBase, imageUrl, itemsUrl, itemUrl } from '@lib/config';
+import { apiBase, imageUrl, itemsUrl, itemUrl } from '@lib/api/config';
 import type { Todo } from '@modules/todo';
 
 // API 요청을 위한 axios 인스턴스 생성
@@ -35,8 +35,10 @@ export const getTodos = async (): Promise<Todo[]> => {
   return response.data;
 };
 
-export const createTodo = async (text: string): Promise<Todo> => {
-  const response = await client.post(itemsUrl, { text, completed: false });
+export const createTodo = async (name: string): Promise<Todo> => {
+  const response = await client.post<Todo>(itemsUrl, {
+    name, // ✅ 서버가 요구하는 필드명
+  });
   return response.data;
 };
 
@@ -46,11 +48,15 @@ export const getTodoById = async (id: number): Promise<Todo> => {
 };
 
 export const updateTodo = async (
-  id: number,
+  itemId: number,
   payload: Partial<Omit<Todo, 'id'>>
 ): Promise<Todo> => {
-  const response = await client.put<Todo>(itemUrl(id), payload);
+  const response = await client.patch<Todo>(itemUrl(itemId), payload);
   return response.data;
+};
+
+export const toggleTodo = async (t: Todo): Promise<Todo> => {
+  return updateTodo(t.id, { isCompleted: !t.isCompleted });
 };
 
 export const deleteTodo = async (id: number): Promise<void> => {

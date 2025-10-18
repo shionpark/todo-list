@@ -3,20 +3,22 @@
  */
 export interface Todo {
   id: number;
-  title: string;
+  tenantId: string;
+  name: string;
   memo?: string;
   imageUrl?: string;
-  done: boolean;
-  createdAt: string;
-  updatedAt: string;
+  isCompleted: boolean;
 }
 
-/**
- * Todo를 수정할 때 보내는 데이터 타입
- */
-export interface TodoUpdatePayload {
-  title: string;
+export type CreateTodoPayload = {
+  name: string;
   memo?: string;
   imageUrl?: string;
-  done: boolean;
-}
+};
+
+export type UpdateTodoPayload = Partial<{
+  name: string;
+  memo?: string;
+  imageUrl?: string;
+  isCompleted: boolean;
+}>;
