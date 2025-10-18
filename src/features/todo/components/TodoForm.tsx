@@ -23,7 +23,7 @@ export default function TodoForm() {
         value={value}
         onChange={handleChange}
       />
-      <TodoButton type="add" primary iconOnly={sm} onClick={handleSubmit} />
+      <TodoButton type="submit" variant="add" primary iconOnly={sm} />
     </form>
   );
 }

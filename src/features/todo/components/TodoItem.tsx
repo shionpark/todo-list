@@ -7,6 +7,7 @@
 import { useToggleTodo } from '@lib/queryClient/useToggleTodo';
 import type { Todo } from '@modules/todo';
 import { Check } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import { useId } from 'react';
 
 interface TodoItemProps {
@@ -14,9 +15,12 @@ interface TodoItemProps {
 }
 
 export default function TodoItem({ todo }: TodoItemProps) {
+  const router = useRouter();
   const checkboxId = useId();
 
   const { mutate: toggle, isPending } = useToggleTodo();
+
+  const handleNavigate = () => router.push(`/items/${todo.id}`);
 
   const handleToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.stopPropagation(); // 상위 클릭(네비게이션) 방지
@@ -25,11 +29,13 @@ export default function TodoItem({ todo }: TodoItemProps) {
 
   return (
     <div
-      className={`border-text flex items-center justify-between rounded-3xl border-2 p-2 ${todo.isCompleted ? 'bg-violet-100' : 'bg-white'}`}
+      onClick={handleNavigate}
+      className={`border-text flex items-center justify-between rounded-3xl border-2 p-2 brightness-100 hover:cursor-pointer hover:brightness-95 ${todo.isCompleted ? 'bg-violet-100' : 'bg-white'}`}
     >
       <div className="flex flex-1 items-center gap-4">
         <label
           htmlFor={checkboxId} // 항목마다 다른 id
+          onClick={(e) => e.stopPropagation()}
           className={`h-7 w-7 cursor-pointer rounded-full border-2 border-slate-800 ${todo.isCompleted ? 'bg-primary hover:bg-primary-100' : 'bg-amber-50 hover:bg-amber-100'}`}
         >
           {todo.isCompleted && (
