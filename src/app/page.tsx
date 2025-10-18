@@ -1,56 +1,53 @@
 'use client';
 
-import Image from 'next/image';
-import Input from '@components/common/Input';
-import TodoButton from '@components/todo/TodoButton';
-import { useBreakpoint } from '@hooks/useBreakpoint';
+import { Loader } from 'lucide-react';
+
+import { useTodos } from '@lib/queryClient/useTodos';
+import TodoForm from 'features/todo/components/TodoForm';
+import TodoSection from 'features/todo/components/TodoSection';
+import { useFilteredTodos } from 'features/todo/hooks/useFilteredTodos';
 
 export default function Home() {
-  const { sm } = useBreakpoint();
+  const { data: todos = [], isLoading, isError, error } = useTodos();
+  const { inProgress, completed } = useFilteredTodos(todos);
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center py-10">
+        <Loader />
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className="text-center text-red-500">
+        데이터를 불러오는 중 오류가 발생했습니다: {error.message}
+      </div>
+    );
+  }
 
   return (
     <>
-      <div className="flex justify-between gap-2">
-        <Input type="search" />
-        <TodoButton type="add" primary onClick={() => alert('추가하기!')} />
-      </div>
-      <div className="mt-6 grid gap-4 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2">
-        <div>
-          <div className="w-24 rounded-3xl bg-lime-300 p-1.5 text-center font-bold text-green-800">
-            TO DO
-          </div>
-          <div className="my-4 flex h-80 flex-col items-center justify-between gap-4">
-            <Image
-              src="/images/empty_todo.png"
-              alt="My Todo List 로고"
-              width={200}
-              height={200}
-            />
-            <span className="ty-1 flex text-center text-slate-400">
-              할 일이 없어요.
-              <br />
-              TODO를 새롭게 추가해주세요!
-            </span>
-          </div>
-        </div>
-        <div>
-          <div className="w-24 rounded-3xl bg-green-800 p-1.5 text-center font-bold text-yellow-400">
-            DONE
-          </div>
-          <div className="my-4 flex h-80 flex-col items-center justify-between gap-4">
-            <Image
-              src="/images/empty_done.png"
-              alt="My Todo List 로고"
-              width={200}
-              height={200}
-            />
-            <span className="ty-1 flex text-center text-slate-400">
-              아직 다 한일이 없어요.
-              <br />
-              해야 할 일을 체크해보세요!
-            </span>
-          </div>
-        </div>
+      <TodoForm />
+      <div className="mt-6 grid gap-6 lg:grid-cols-2">
+        <TodoSection
+          title="TO DO"
+          color="bg-lime-300"
+          textColor="text-green-800"
+          todos={inProgress}
+          emptyImage="/images/empty_todo.png"
+          emptyText="할 일이 없어요. TODO를 새롭게 추가해보세요!"
+        />
+
+        <TodoSection
+          title="DONE"
+          color="bg-green-800"
+          textColor="text-yellow-400"
+          todos={completed}
+          emptyImage="/images/empty_done.png"
+          emptyText="아직 완료된 일이 없어요. 해야 할 일을 체크해보세요!"
+        />
       </div>
     </>
   );
