@@ -11,7 +11,7 @@ Next.js + TypeScript 기반의 할 일 관리 서비스입니다.<br/>
 | 프로젝트명 | To-Do List                                                                      |
 | 목표       | 사용자가 할 일을 생성·수정·삭제하고 완료 상태를 관리할 수 있는 Todo 서비스 구현 |
 | 개발 기간  | 2025.10.13 ~ 2025.10.17                                                         |
-| 배포 링크  | https://todo-app.vercel.app/                                                    |
+| 배포 링크  | https://todo-list-gf24.vercel.app/                                                   |
 
 ## 기술 스택
 
@@ -78,11 +78,3 @@ http://localhost:3000
 - 닉네임이나 영문 아이디를 자유롭게 지정할 수 있으며,<br/>
   예를 들어 tenantId가 shionpark이라면 요청 URL은 다음과 같습니다:<br/>
   `https://assignment-todolist-api.vercel.app/api/shionpark/items`
-
-## 작업 순서
-
-1. 환경설정 chore/init-… → chore/config-env-tenant → feat/api-client
-2. 컬러 시스템 및 공통 컴포넌트 feat/ui-system-colors → feat/common-components
-3. Todo CRUD feat/todo-list-read → feat/todo-create → feat/todo-toggle
-4. Todo 상세 조회 feat/todo-route-detail → feat/todo-update → feat/todo-delete
-5. 반응형 레이아웃 feat/responsive-layout → docs/readme-usage → chore/deploy-vercel → refactor/\*
