@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 
 /**
- * @hook useTodoInput
+ * @hook useCreateTodoInput
  * @description
  *   Todo 입력 폼을 제어하는 훅입니다.
  *   입력값 상태(`value`), 변경 이벤트(`handleChange`), 제출 이벤트(`handleSubmit`)를 제공합니다.
@@ -17,7 +17,7 @@ import { useState, useCallback } from 'react';
  *
  */
 
-export function useTodoInput(onSubmit: (value: string) => void) {
+export function useCreateTodoInput(onSubmit: (value: string) => void) {
   const [value, setValue] = useState<string>('');
 
   const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {

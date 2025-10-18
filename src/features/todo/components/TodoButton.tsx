@@ -15,6 +15,8 @@ export default function TodoButton({
   primary = false,
   iconOnly = false,
   onClick,
+  type = 'button',
+  ...props
 }: TodoButtonProps) {
   const types = {
     add: {
@@ -40,7 +42,12 @@ export default function TodoButton({
     : 'flex gap-1 px-3 py-2';
 
   return (
-    <Button className={`${baseColor} ${shape}`} onClick={onClick}>
+    <Button
+      type={type}
+      className={`${baseColor} ${shape}`}
+      onClick={onClick}
+      {...props}
+    >
       {icon}
       {!iconOnly && <span>{label}</span>}
     </Button>
